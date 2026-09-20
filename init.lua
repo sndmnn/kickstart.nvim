@@ -488,6 +488,17 @@ do
 
   -- ... and there is more!
   --  Check out: https://github.com/nvim-mini/mini.nvim
+
+  -- oil.nvim
+  vim.pack.add { gh 'stevearc/oil.nvim' }
+  local oil = require('oil')
+  oil.setup {
+    view_options = {
+      show_hidden = true,
+    },
+  }
+
+  vim.keymap.set('n', '<leader>oo', oil.open, { desc = '[O]il [O]pen' })
 end
 
 -- ============================================================
