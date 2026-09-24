@@ -491,7 +491,7 @@ do
 
   -- oil.nvim
   vim.pack.add { gh 'stevearc/oil.nvim' }
-  local oil = require('oil')
+  local oil = require 'oil'
   oil.setup {
     view_options = {
       show_hidden = true,
@@ -840,6 +840,7 @@ do
         -- lua = true,
         -- python = true,
         go = true,
+        sql = true,
       }
       if enabled_filetypes[vim.bo[bufnr].filetype] then
         return { timeout_ms = 500 }
@@ -853,6 +854,7 @@ do
     -- You can also specify external formatters in here.
     formatters_by_ft = {
       go = { 'gofmt' },
+      sql = { 'sqlfluff' },
       -- rust = { 'rustfmt' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
