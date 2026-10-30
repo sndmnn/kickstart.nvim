@@ -750,6 +750,8 @@ do
     -- tsc = {},
     ts_ls = {},
     prismals = {
+      -- Tries to find a specific version of the language server in the project's
+      -- dependencies. Falls back to Mason's version.
       cmd = function(dispatchers, config)
         local root = config.root_dir or vim.fn.getcwd()
         local bin = 'prisma-language-server' -- fallback: Mason's global install
