@@ -748,6 +748,24 @@ do
     gopls = {},
     -- pyright = {},
     -- tsc = {},
+    ts_ls = {},
+    prismals = {
+      cmd = function(dispatchers, config)
+        local root = config.root_dir or vim.fn.getcwd()
+        local bin = 'prisma-language-server' -- fallback: Mason's global install
+
+        -- walk up from the project root to support monorepos
+        for dir in vim.fs.parents(root .. '/x') do
+          local candidate = dir .. '/node_modules/.bin/prisma-language-server'
+          if vim.fn.executable(candidate) == 1 then
+            bin = candidate
+            break
+          end
+        end
+
+        return vim.lsp.rpc.start({ bin, '--stdio' }, dispatchers, { cwd = config.root_dir })
+      end,
+    },
     --
     -- Some languages (like rust) have entire language plugins that can be useful:
     --    https://github.com/mrcjkb/rustaceanvim
@@ -860,7 +878,10 @@ do
       -- python = { "isort", "black" },
       --
       -- You can use 'stop_after_first' to run the first available formatter from the list
-      -- javascript = { "prettierd", "prettier", stop_after_first = true },
+      javascript = { 'prettierd', 'prettier', stop_after_first = true },
+      javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+      typescript = { 'prettierd', 'prettier', stop_after_first = true },
+      typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
     },
   }
 
